@@ -1,7 +1,7 @@
-// import { create } from "zustand";
+import { create } from "zustand";
 
-// const store = (set) => ({
-//     tasks: [{ title: 'TestTask', planned: 'PLANNED'}]
-// });
+const store = (set) => ({
+    tasks: [{ title: 'TestTask', state: 'PLANNED'}]
+});
 
-// export const useStore = create(store);
+export const useStore = create(store);

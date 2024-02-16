@@ -3,7 +3,7 @@ import classNames from "classnames";
 import "./Task.css";
 
 const Task = ({ title }) => {
-    const STATUS = "DONE";
+    const STATUS = "PLANNED";
   return (
     <div className="task">
       <div>{title}</div>
