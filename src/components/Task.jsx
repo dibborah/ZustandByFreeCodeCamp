@@ -9,8 +9,12 @@ const Task = ({ title }) => {
     store.tasks.find((task) => task.title === title)
   );
   const deleteTask = useStore((store) => store.deleteTask);
+  const setDraggedTask = useStore((store) => store.setDraggedTask);
+
   return (
-    <div className="task" draggable>
+    <div className="task" draggable
+    onDragStart={()=> setDraggedTask(tasks.title)}
+    >
       <div>{tasks.title}</div>
       <div className="bottomWrapper">
         <div onClick={()=>deleteTask(tasks.title)}><img src={Trash}/></div>
