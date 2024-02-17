@@ -1,15 +1,18 @@
 /* eslint-disable react/prop-types */
 import classNames from "classnames";
 import "./Task.css";
+import { useStore } from "../store";
 
 const Task = ({ title }) => {
-    const STATUS = "PLANNED";
+  const tasks = useStore((store)=> 
+  store.tasks.find((task)=> task.title === title)
+  )
   return (
     <div className="task">
-      <div>{title}</div>
+      <div>{tasks.title}</div>
       <div className="bottomWrapper">
       <div></div>
-      <div className={classNames("status", STATUS)}>{STATUS}</div>
+      <div className={classNames("status", tasks.state)}>{tasks.state}</div>
       </div>
     </div>
   );
