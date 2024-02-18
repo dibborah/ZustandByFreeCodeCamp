@@ -1,8 +1,8 @@
 import { create } from "zustand";
-import { devtools } from "zustand/middleware";
+import { devtools,persist } from "zustand/middleware";
 
 const store = (set) => ({
-  tasks: [{ title: "TestTask", state: "ONGOING" }],
+  tasks: [],
   addTask: (title, state) =>
     set((store) => ({ tasks: [...store.tasks, { title, state }] }), false, "addTask"),// The true/false passed here only manipulate and replaces the changed stated and not the whole store if passed as false, so we are passing false
   deleteTask: (title) =>
@@ -19,4 +19,30 @@ const store = (set) => ({
     })),
 });
 
-export const useStore = create(devtools(store));
+// Define a custom logger middleware in Zustand
+const log = (config) => (
+  // Return a function that represents the wrapped `set` function
+  // This function takes the `set`, `get`, and `api` functions as arguments
+  (set, get, api) => 
+    // Call the `config` function with the wrapped `set` function as the first argument
+    // and pass `get` and `api` functions as additional parameters
+    config(
+      // Define the wrapped `set` function that intercepts state updates
+      // and logs information about the state changes
+      (...args) => {
+        // Log the state update arguments to the console
+        console.log(args);
+        // Apply the state updates using the original `set` function
+        set(...args);
+      },
+      // Pass the `get` function to the `config` function
+      get,
+      // Pass the `api` function to the `config` function
+      api
+    )
+);
+
+
+export const useStore = create(
+  log(persist(devtools(store), {name: 'store'}))
+);
