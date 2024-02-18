@@ -1,6 +1,5 @@
 # React + Vite
-![image](https://github.com/dibborah/ZustandByFreeCodeCamp/assets/90625406/b3541708-32e2-4a93-8a13-23edc6213e3d)
-
+![image](https://github.com/dibborah/ZustandByFreeCodeCamp/assets/90625406/93906301-2f27-49cc-bec3-197e1646ce9d)
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
