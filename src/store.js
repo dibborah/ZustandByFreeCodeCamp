@@ -1,9 +1,10 @@
 import { create } from "zustand";
+import { devtools } from "zustand/middleware";
 
 const store = (set) => ({
   tasks: [{ title: "TestTask", state: "ONGOING" }],
   addTask: (title, state) =>
-    set((store) => ({ tasks: [...store.tasks, { title, state }] })),
+    set((store) => ({ tasks: [...store.tasks, { title, state }] }), false, "addTask"),// The true/false passed here only manipulate and replaces the changed stated and not the whole store if passed as false, so we are passing false
   deleteTask: (title) =>
     set((store) => ({
       tasks: store.tasks.filter((task) => task.title !== title),
@@ -18,4 +19,4 @@ const store = (set) => ({
     })),
 });
 
-export const useStore = create(store);
+export const useStore = create(devtools(store));
