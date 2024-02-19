@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useStore } from "../store";
 import "./Column.css";
 import Task from "./Task";
@@ -67,3 +67,18 @@ const Column = ({ state }) => {
 };
 
 export default Column;
+
+function RefTest() {// Store states in Refs as well when we donot want to re-render the component when the state changes
+  const ref = useRef();
+
+  useEffect(()=>{
+    useStore.subscribe(
+      store => store.tasks,
+      (tasks)=>{
+        ref.current = tasks;
+      }
+    )
+  },[])
+
+  return ref.current;
+}
